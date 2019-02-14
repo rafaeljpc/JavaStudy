@@ -54,7 +54,7 @@ public class HelloMockUserTest {
         mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/api/hello?name=Raf")
+                                .get("/api/test?name=Raf")
                                 .with(helper.bearerToken("my-client"))
                                 .accept(MediaType.ALL)
                 )

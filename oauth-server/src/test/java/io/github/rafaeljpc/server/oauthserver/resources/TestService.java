@@ -7,15 +7,26 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
-        value = {"/api/hello"},
+        value = {"/api/test"},
         produces = MediaType.APPLICATION_JSON_VALUE
 )
 @Validated
-public class HelloService {
+public class TestService {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Welcome greetings(@RequestParam("name") String name) {
-        return new Welcome(name);
+    public ServiceResult service(@RequestParam("name") String name) {
+        return new ServiceResult(name);
+    }
+
+    public static class ServiceResult {
+
+        private static final String fmt = "Welcome %s!";
+
+        public String greetings;
+
+        public ServiceResult(String name) {
+            this.greetings = String.format(fmt, name);
+        }
     }
 }

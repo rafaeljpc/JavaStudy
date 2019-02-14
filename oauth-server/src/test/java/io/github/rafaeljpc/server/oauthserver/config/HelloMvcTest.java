@@ -54,7 +54,7 @@ public class HelloMvcTest {
     @WithMockUser(username = "user@test.com", password = "password")
     public void shouldAllowUserWithNoAuthorities() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/hello?name=Raf")
+                .get("/api/test?name=Raf")
                 .with(helper.bearerToken("my-client"))
                 .accept(MediaType.ALL))
                 .andExpect(status().isOk())

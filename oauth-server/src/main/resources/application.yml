@@ -2,3 +2,8 @@ logging:
   level:
     io.github.rafaeljpc: DEBUG
     org.springframework.web: DEBUG
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oauth2
+    username: postgres
+    password: a

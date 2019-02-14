@@ -1,4 +1,0 @@
-logging:
-  level:
-    io.github.rafaeljpc: DEBUG
-    org.springframework.web: DEBUG
