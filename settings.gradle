@@ -1,3 +1,10 @@
 rootProject.name = 'server'
-include 'oauth-server'
-
+fileTree('.') {
+    include '**/build.gradle'
+    exclude 'build.gradle'
+}.collect {
+    relativePath(it.parent).replace(File.separator, ':')
+}
+.each {
+    include(it)
+}
