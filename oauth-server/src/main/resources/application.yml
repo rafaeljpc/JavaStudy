@@ -7,3 +7,11 @@ spring:
     url: jdbc:postgresql://localhost:5432/oauth2
     username: postgres
     password: a
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
