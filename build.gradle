@@ -1,11 +1,24 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+        springCloudVersion = 'Greenwich.RELEASE'
+    }
+}
+
 plugins {
     id 'java'
 }
 
 group 'io.github.rafaeljpc'
 version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 
 repositories {
     mavenCentral()
