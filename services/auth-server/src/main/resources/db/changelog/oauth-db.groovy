@@ -263,6 +263,21 @@ databaseChangeLog {
                 referencedColumnNames: 'id',
                 referencedTableName: 'role'
         )
+    }
 
+    changeSet(id: 'rename-user-table', author: 'rafaeljpc') {
+        renameTable(oldTableName: 'user', newTableName: 'users')
+    }
+
+    changeSet(id: 'insert-user-roles', author: 'rafaeljpc') {
+        insert(tableName: 'role_user') {
+            column(name: 'role_id', valueNumeric: 1)
+            column(name: 'user_id', valueNumeric: 1)
+        }
+
+        insert(tableName: 'role_user') {
+            column(name: 'role_id', valueNumeric: 2)
+            column(name: 'user_id', valueNumeric: 2)
+        }
     }
 }

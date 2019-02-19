@@ -1,5 +1,5 @@
 server:
-  port: 9999
+  port: 9092
   use-forward-headers: false
   servlet:
     context-path: /uaa
@@ -17,15 +17,23 @@ spring:
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
       ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
 check-user-scopes: true
 
 # SLF4J
 logging:
   level:
-    ROOT: ERROR
-    org.springframework.web: ERROR
-    com.enrico.microservices: DEBUG
-  file:  /tmp/logs/application.log
+    ROOT: INFO
+    org.springframework.web: INFO
+    io.github.rafaeljpc: DEBUG
+  file: /tmp/logs/${spring.application.name}.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -56,6 +64,13 @@ spring:
         naming:
           physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         ddl-auto: validate
+        properties:
+          hibernate:
+            temp:
+              use_jdbc_metadata_defaults: false
+            jdbc:
+              lob:
+                non_contextual_creation: true
 check-user-scopes: true
 
 eureka:

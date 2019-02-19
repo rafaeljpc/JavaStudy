@@ -17,6 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@Table(name = "users")
 public class User extends BaseIdEntity implements UserDetails {
 
     private static final long serialVersionUID = 1L;

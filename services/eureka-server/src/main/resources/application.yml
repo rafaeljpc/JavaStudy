@@ -19,9 +19,9 @@ eureka:
 
 logging:
   level:
-    ROOT: ERROR
-    org.springframework.web: ERROR
-    io.github.rafaeljpc.server.service: DEBUG
+    ROOT: INFO
+    org.springframework.web: INFO
+    io.github.rafaeljpc: DEBUG
   file: /tmp/logs/${spring.application.name}.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
