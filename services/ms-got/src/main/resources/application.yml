@@ -1,0 +1,100 @@
+server:
+  port: 9093
+  servlet:
+    context-path: /ms-got
+  compression:
+    enabled: false
+
+management:
+  security:
+    enabled: false
+
+auth-server:
+  url: http://localhost:9999
+
+spring:
+  profiles: default
+  application:
+    name: ms-got
+  datasource:
+    url: jdbc:postgresql://localhost:5432/got
+    username: postgres
+    password: a
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      indent-output: true
+check-user-scopes: true
+
+
+# SLF4J
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+    io.github.rafaeljpc: DEBUG
+  file: /tmp/logs/${spring.application.name}.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+
+---
+
+#Configurações de Quando estiver em Container
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:postgresql://localhost:5432/got
+    username: postgres
+    password: a
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: validate
+      properties:
+        hibernate:
+          temp:
+            use_jdbc_metadata_defaults: false
+          jdbc:
+            lob:
+              non_contextual_creation: true
+check-user-scopes: true
+
+eureka:
+  instance:
+    hostname: localhost
+    port: 9091
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.port}/eureka/
+  server:
+    wait-time-in-ms-when-sync-empty: 3000
+
