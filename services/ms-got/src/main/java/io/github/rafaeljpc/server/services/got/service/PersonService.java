@@ -1,6 +1,5 @@
 package io.github.rafaeljpc.server.services.got.service;
 
-import groovyx.gpars.extra166y.Ops;
 import io.github.rafaeljpc.server.services.got.controller.HouseController;
 import io.github.rafaeljpc.server.services.got.controller.PersonController;
 import io.github.rafaeljpc.server.services.got.dto.Person;
@@ -15,10 +14,8 @@ import io.github.rafaeljpc.server.services.got.repository.PersonEntityRepository
 import lombok.extern.log4j.Log4j2;
 import org.owasp.encoder.Encode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rocks.spiffy.spring.hateoas.utils.uri.builder.ControllerUriBuilder;
 import rocks.spiffy.spring.hateoas.utils.uri.resolver.ControllerUriResolver;
 
 import javax.annotation.PostConstruct;

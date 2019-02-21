@@ -2,8 +2,12 @@ package io.github.rafaeljpc.server.services.got.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -13,6 +17,7 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.inject.Qualifier;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
@@ -20,15 +25,39 @@ import javax.sql.DataSource;
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-    @Autowired
-    private DataSource dataSource;
+
+    @Bean
+    @Primary
+    @ConfigurationProperties("spring.datasource")
+    public DataSourceProperties dataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    @Primary
+    @ConfigurationProperties("spring.datasource")
+    public DataSource dataSource() {
+        return dataSourceProperties().initializeDataSourceBuilder().build();
+    }
+
+    @Bean
+    @ConfigurationProperties("spring.oauth-datasource")
+    public DataSourceProperties oauthDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Bean
+    @ConfigurationProperties("spring.oauth-datasource")
+    public DataSource oauthDataSource() {
+        return oauthDataSourceProperties().initializeDataSourceBuilder().build();
+    }
 
     @Value("${auth-server.url}")
     private String authEndpoint;
 
     @Bean
     public JdbcTokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+        return new JdbcTokenStore(oauthDataSource());
     }
 
     @Override

@@ -29,6 +29,7 @@ public class PersonController {
 
     @LogExecution
     @LogRequest
+    @PreAuthorize("hasAuthority('role_admin')")
     @GetMapping
     @ApiOperation(value = "View a list of all available person", response = Iterable.class)
     @ApiResponses( value = {
