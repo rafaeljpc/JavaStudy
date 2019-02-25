@@ -1,4 +1,4 @@
-# JavaStudy
+# GoT Java Services
 
 This project is a Java Spring Boot Microservice with OAuth2
 study project. This is based on this article [Building Scalable Container-Ready and 
